@@ -5,9 +5,9 @@ import time
 sg.theme("Black")
 
 clock = sg.Text("", key="clock")
-label = sg.Text("Type in a to-do")
+label = sg.Text("Type in a To-Do")
 input_box = sg.InputText(tooltip="enter todo", key="todo")
-add = sg.Button("add")
+add = sg.Button("add",bind_return_key=True)
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
                       enable_events=True, size=[45, 10])
 
@@ -31,7 +31,7 @@ while True:
         case "add":
             todos = functions.get_todos()
             new_todo = values['todo'] + "\n"
-            todos.append(new_todo)
+            todos.insert(0,new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
             window['todo'].update(value="")
