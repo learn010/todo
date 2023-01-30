@@ -12,19 +12,23 @@ input_ft = sg.InputText(key="feet")
 input_inch = sg.InputText(key="inches")
 conv_button = sg.Button("Convert")
 result_label = sg.Text("",key="result_label")
-
+exit = sg.Button("Exit", key="exit")
+sg.theme("Black")
 
 window = sg.Window("convertor",
                    layout=[[ft_label,input_ft],
                            [inch_label, input_inch],
-                           [conv_button,result_label]])
+                           [conv_button,exit, result_label]])
 
 while True:
    event, values = window.read()
    print(f"event ={event} values = {values}")
    match event:
-       case Convert:
+       case "Convert":
            result = convert(float(values['feet']),float(values['inches']))
            window['result_label'].update(value=f"this is {result} meters")
+
+       case "exit":
+           break
 
 window.close()
